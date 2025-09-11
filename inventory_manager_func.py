@@ -41,12 +41,6 @@ def add_product(itemList):
     itemList.append({"name": name, "code": code, "price": price, "qty": qty})
     print(f"✅ 신규 상품 {name} 등록 완료. 현재 수량: {qty}")
 
-if __name__ == "__main__":
-    # 이 부분은 단독 실행을 위한 테스트 코드입니다.
-    print("상품 등록 기능을 테스트합니다.")
-    add_product()
-    print("\n현재 상품 목록:", itemList)
-
 #---------상품 삭제 함수 ---------------
 def validate_code(prompt="상품 코드: "):
     """영문 3글자 + 숫자 3글자 형식(예: ABC123)으로 정확히 받을 때까지 반복"""
@@ -74,12 +68,6 @@ def delete_product(itemList):
         print(f"✅ 상품 '{item['name']}' ({item['code']})가 삭제되었습니다.")
     else:
         print(f"⚠️ 경고: '{code_to_delete}' 코드를 가진 상품을 찾을 수 없습니다.")
-
-if __name__ == "__main__":
-    # 이 부분은 단독 실행을 위한 테스트 코드입니다.
-    print("상품 삭제 기능을 테스트합니다.")
-    delete_product()
-    print("\n현재 상품 목록:", itemList)
 
 # -----------------조회 함수-----------------
 def list_items(items, low_stock_threshold=None):
