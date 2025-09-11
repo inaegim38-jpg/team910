@@ -19,9 +19,9 @@ while True:
     ''').upper().strip()
 
     if choice == 'R':
-        pass
+        imf.add_product(itemList)
     elif choice == 'D':
-        pass
+        imf.delete_product(itemList)
     elif choice == 'L':
         imf.list_items(itemList)
     elif choice == 'S':
