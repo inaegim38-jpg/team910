@@ -23,9 +23,9 @@ while True:
     elif choice == 'D':
         pass
     elif choice == 'L':
-        pass
+        list_items()
     elif choice == 'S':
-        pass
+        search_items()
     if choice == 'I':
         product_input()
     elif choice == 'O':
