@@ -1,3 +1,86 @@
+import re
+code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
+
+#---------- 상품 등록 함수 -------------------
+# 상품 코드 정규식 (영문 3글자 + 숫자 3글자)
+
+def validate_code(prompt="상품 코드: "):
+    """영문 3글자 + 숫자 3글자 형식(예: ABC123)으로 정확히 받을 때까지 반복"""
+    while True:
+        code = input(prompt).strip()
+        if code_pattern.match(code):
+            return code.upper()
+        print("❌ 잘못된 코드 형식입니다. 영문 3글자 + 숫자 3글자(예: ABC123)로 입력하세요.")
+
+def get_nonnegative_int(prompt="수량 입력: "):
+    """0 이상의 정수만 받음"""
+    while True:
+        s = input(prompt).strip()
+        if s.isdigit():
+            return int(s)
+        print("❌ 0 이상의 정수를 입력하세요.")
+
+def find_item(code, itemList):
+    """상품 코드로 상품 찾기"""
+    code = code.upper()
+    for item in itemList:
+        if item['code'].upper() == code:
+            return item
+    return None
+
+def add_product(itemList):
+    """R - 상품 등록 기능"""
+    print("\n=== R - 상품 등록 ===")
+    name = input("상품 이름: ").strip()
+    code = validate_code()
+    if find_item(code, itemList):
+        print(f"⚠️ 경고: '{code}' 코드는 이미 존재합니다.")
+        return
+    price = get_nonnegative_int("상품 가격: ")
+    qty = get_nonnegative_int("초기 수량: ")
+    itemList.append({"name": name, "code": code, "price": price, "qty": qty})
+    print(f"✅ 신규 상품 {name} 등록 완료. 현재 수량: {qty}")
+
+if __name__ == "__main__":
+    # 이 부분은 단독 실행을 위한 테스트 코드입니다.
+    print("상품 등록 기능을 테스트합니다.")
+    add_product()
+    print("\n현재 상품 목록:", itemList)
+
+#---------상품 삭제 함수 ---------------
+def validate_code(prompt="상품 코드: "):
+    """영문 3글자 + 숫자 3글자 형식(예: ABC123)으로 정확히 받을 때까지 반복"""
+    while True:
+        code = input(prompt).strip()
+        if code_pattern.match(code):
+            return code.upper()
+        print("❌ 잘못된 코드 형식입니다. 영문 3글자 + 숫자 3글자(예: ABC123)로 입력하세요.")
+
+def find_item(code, itemList):
+    """상품 코드로 상품 찾기"""
+    code = code.upper()
+    for item in itemList:
+        if item['code'].upper() == code:
+            return item
+    return None
+
+def delete_product(itemList):
+    """D - 상품 삭제 기능"""
+    print("\n=== D - 상품 삭제 ===")
+    code_to_delete = validate_code("삭제할 상품 코드: ")
+    item = find_item(code_to_delete, itemList)
+    if item:
+        itemList.remove(item)
+        print(f"✅ 상품 '{item['name']}' ({item['code']})가 삭제되었습니다.")
+    else:
+        print(f"⚠️ 경고: '{code_to_delete}' 코드를 가진 상품을 찾을 수 없습니다.")
+
+if __name__ == "__main__":
+    # 이 부분은 단독 실행을 위한 테스트 코드입니다.
+    print("상품 삭제 기능을 테스트합니다.")
+    delete_product()
+    print("\n현재 상품 목록:", itemList)
+
 # -----------------조회 함수-----------------
 def list_items(items, low_stock_threshold=None):
     """전체 재고 목록 출력 + 임계치 이하 상품 표시"""
@@ -50,9 +133,8 @@ def search_items(items):
 
 
 # ---------------- 입고 함수 ----------------
-def product_input():
+def product_input(itemList):
     print("=== 상품 입고 ===")
-    code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
 
     # 코드 입력 및 검증
     while True:
@@ -108,9 +190,8 @@ def product_input():
 
 
 # ---------------- 출고 함수 ----------------
-def product_output():
+def product_output(itemList):
     print("=== 상품 출고 ===")
-    code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
 
     # 코드 입력 및 검증
     while True:
@@ -142,4 +223,3 @@ def product_output():
         else:
             item['qty'] -= qty
             print(f"{item['name']} 출고 완료. 남은 수량: {item['qty']}")
-
