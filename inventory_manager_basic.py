@@ -1,5 +1,6 @@
 import re
 import inventory_manager_func as imf
+
 # 샘플 초기 재고
 itemList = [
     {"name": "아메리카노 캔", "code": "AME001", "price": 1500, "qty": 24},
