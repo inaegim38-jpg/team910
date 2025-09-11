@@ -1,4 +1,3 @@
-import re
 import inventory_manager_func as imf
 
 # 샘플 초기 재고
@@ -27,10 +26,10 @@ while True:
         imf.list_items(itemList)
     elif choice == 'S':
         imf.search_items(itemList)
-    if choice == 'I':
-        imf.product_input()
+    elif choice == 'I':
+        imf.product_input(itemList)
     elif choice == 'O':
-        imf.product_output()
+        imf.product_output(itemList)
     elif choice == 'Q':
         print("프로그램을 종료합니다.")
         break

@@ -1,3 +1,5 @@
+import re
+code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
 # -----------------조회 함수-----------------
 def list_items(items, low_stock_threshold=None):
     """전체 재고 목록 출력 + 임계치 이하 상품 표시"""
@@ -50,9 +52,8 @@ def search_items(items):
 
 
 # ---------------- 입고 함수 ----------------
-def product_input():
+def product_input(itemList):
     print("=== 상품 입고 ===")
-    code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
 
     # 코드 입력 및 검증
     while True:
@@ -108,9 +109,8 @@ def product_input():
 
 
 # ---------------- 출고 함수 ----------------
-def product_output():
+def product_output(itemList):
     print("=== 상품 출고 ===")
-    code_pattern = re.compile(r'^[A-Za-z]{3}\d{3}$')
 
     # 코드 입력 및 검증
     while True:
