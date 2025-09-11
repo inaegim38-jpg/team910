@@ -24,9 +24,9 @@ while True:
     elif choice == 'D':
         pass
     elif choice == 'L':
-        imf.list_items()
+        imf.list_items(itemList)
     elif choice == 'S':
-        imf.search_items()
+        imf.search_items(itemList)
     if choice == 'I':
         imf.product_input()
     elif choice == 'O':
