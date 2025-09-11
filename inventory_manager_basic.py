@@ -1,5 +1,5 @@
 import re
-
+import inventory_manager_func as imf
 # 샘플 초기 재고
 itemList = [
     {"name": "아메리카노 캔", "code": "AME001", "price": 1500, "qty": 24},
@@ -27,9 +27,9 @@ while True:
     elif choice == 'S':
         pass
     if choice == 'I':
-        product_input()
+        imf.product_input()
     elif choice == 'O':
-        product_output()
+        imf.product_output()
     elif choice == 'Q':
         print("프로그램을 종료합니다.")
         break

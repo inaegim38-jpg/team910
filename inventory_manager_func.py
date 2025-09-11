@@ -1,11 +1,3 @@
-import re
-import inventory_manager_func
-# 샘플 초기 재고
-itemList = [
-    {"name": "아메리카노 캔", "code": "AME001", "price": 1500, "qty": 24},
-    {"name": "라떼 캔",     "code": "LAT001", "price": 1800, "qty": 12},
-]
-
 # ---------------- 입고 함수 ----------------
 def product_input():
     print("=== 상품 입고 ===")
