@@ -1,3 +1,54 @@
+# -----------------조회 함수-----------------
+def list_items(items, low_stock_threshold=None):
+    """전체 재고 목록 출력 + 임계치 이하 상품 표시"""
+    if not items:
+        print("등록된 상품이 없습니다.")
+        return
+
+    print(f"현재 재고 (총 {len(items)}개)")
+    print("-" * 60)
+    print(f"{'코드':<10} | {'이름':<20} | {'단가':>8} | {'수량':>6}")
+    print("-" * 60)
+    for p in items:
+        print(f"{p['code']:<10} | {p['name']:<20} | {p['price']:>8} | {p['qty']:>6}")
+    print("-" * 60)
+
+    if low_stock_threshold is not None:
+        lows = [p for p in items if p['qty'] <= low_stock_threshold]
+        if lows:
+            print(f"임계치(≤{low_stock_threshold}) 이하 상품:")
+            for p in lows:
+                print(f" - {p['code']} {p['name']} (수량: {p['qty']})")
+        else:
+            print(f"임계치(≤{low_stock_threshold}) 이하 상품: 없음")
+
+# --------------검색 함수--------------
+def search_items(items):
+    """상품 코드나 이름 일부로 검색"""
+    key = input("검색어(이름/코드 일부): ").strip()
+    if not key:
+        print("검색어가 비어 있습니다.")
+        return
+    key_u = key.upper()
+
+    results = [
+        p for p in items
+        if key_u in p.get('code', '').upper() or key_u in p.get('name', '').upper()
+    ]
+
+    if not results:
+        print("검색 결과가 없습니다.")
+        return
+
+    print(f"검색 결과 (총 {len(results)}개)")
+    print("-" * 60)
+    print(f"{'코드':<10} | {'이름':<20} | {'단가':>8} | {'수량':>6}")
+    print("-" * 60)
+    for p in results:
+        print(f"{p['code']:<10} | {p['name']:<20} | {p['price']:>8} | {p['qty']:>6}")
+    print("-" * 60)
+
+
 # ---------------- 입고 함수 ----------------
 def product_input():
     print("=== 상품 입고 ===")
